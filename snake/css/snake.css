@@ -1,0 +1,58 @@
+html{
+  background: url(http://www.moillusions.com/wp-content/uploads/i207.photobucket.com/albums/bb234/vurdlak8/illusions/pinwheel.gif);
+  background-size: cover;
+}
+
+.score {
+  display: block;
+  margin: 0 auto;
+  width: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+.grid-item {
+  display: block;
+  float: left;
+  width: 20px;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+.snake{
+  border: 2px solid black;
+  width: 400px;
+  height: 400px;
+  margin: 0 auto;
+  background: url(https://upload.wikimedia.org/wikipedia/commons/6/65/Lucas_Cranach_d._%C3%84._035.jpg);
+  background-size: cover;
+}
+
+.segment {
+  background: url(http://www.vortexdipping.com/images/patterns-animal/yellow-snake-skin.jpg);
+  background-size: cover;
+
+}
+
+.apple {
+  background: red;
+  border-radius: 20px;
+  background: url(https://pixabay.com/static/uploads/photo/2014/04/02/16/28/apple-307356_960_720.png);
+  background-size: cover;
+}
+
+.reset{
+  position: relative;
+  display: block;
+  margin: 0 auto;
+  z-index: 100;
+}
+
+.phrase {
+  top:0;
+  color: lightgrey;
+  left: 0;
+  position: absolute;
+  font-size: 36px;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(245,0,0,0.8);
+}

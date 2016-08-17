@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial;
+}
+
+#grid {
+  border: 5px solid black;
+  width: 300px;
+  height: 300px;
+  background: grey;
+  padding: 0;
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  float: left;
+  width: 100px;
+  height: 100px;
+  border: 5px solid black;
+  font-size: 36px;
+  font-weight: bold;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.grid-item:hover {
+  background: yellow;
+}
+
+.x {
+  background: white;
+  color: green;
+}
+
+.o {
+  background: white;
+  color: blue;
+}
+
+#grid.won {
+  background: white;
+
+}
+
+#grid.won .grid-item:hover{
+  background: inherit;
+}
+
+.winner {
+  background: green;
+  color: white;
+}
+
+.loser {
+  color: red;
+}
+
+#grid.won .winner:hover {
+  background: green;
+}
