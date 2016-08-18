@@ -45,15 +45,68 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const View = __webpack_require__(1);
+	let highscores = JSON.parse(localStorage.getItem('snake'));
+	console.log(highscores);
 
 	$( () => {
+	  renderScores();
 	  let view = new View($('.snake'));
+	  $(document).keypress((e) => handleKeyEvent(e, view));
 	  $('.reset').on('click', function() {
-	    view.quit();
-	    $('.snake').html("");
+	    gameOver(view);
 	    view = new View($('.snake'));
 	  });
 	});
+
+	function renderScores() {
+	  $('.scoreboard').html("");
+	  var sortable = [];
+	  for (var name in highscores) {
+	    sortable.push([name, highscores[name]]);
+	  }
+	  sortable.sort(function(a, b) {
+	    return b[1] - a[1];
+	  });
+	  sortable.forEach(score => {
+	    $('.scoreboard').append(`<div class="personal-score">${score[0]}:  ${score[1]}</div>`);
+	  });
+	}
+
+
+	function gameOver(view) {
+	  view.quit();
+	  $('.snake').html("");
+	  let name = prompt("Enter Your Name", "");
+	  if (highscores) {
+	    let score = highscores[name];
+	    if (typeof score !== 'undefined') {
+	      if (view.score > score) {
+	        highscores[name] = view.score;
+	      }
+	    } else {
+	      highscores[name] = view.score;
+	    }
+	  } else {
+	    highscores = {};
+	    highscores[name] = view.score;
+	  }
+	  localStorage.setItem('snake', JSON.stringify(highscores));
+	  renderScores();
+	}
+
+	function pauseGame(view) {
+	  if (view.isPaused) {
+	    view.resume();
+	  } else {
+	    view.quit();
+	  }
+	}
+
+	function handleKeyEvent(event, view) {
+	  if (event.keyCode === 32) {
+	    pauseGame(view);
+	  }
+	}
 
 
 /***/ },
@@ -76,6 +129,8 @@
 
 	  constructor ($el) {
 	    this.$el = $el;
+	    this.isPaused = false;
+	    $('.pause').css({display: "none"});
 	    this.snake = new Snake();
 	    this.board = new Board(this.snake);
 	    this.updateTurn = false;
@@ -116,7 +171,7 @@
 	      let left = this.board.apples.slice(0,index);
 	      let right = this.board.apples.slice(index + 1);
 	      this.board.apples = [...left, ...right];
-	      this.eatApple()
+	      this.eatApple();
 	    }
 	    this.board.render();
 	    this.updateTurn = false;
@@ -133,6 +188,14 @@
 
 	  quit() {
 	    clearInterval(this.interval);
+	    $('.pause').css({display: "block"});
+	    this.isPaused = true;
+	  }
+
+	  resume() {
+	    this.interval = setInterval(this.step.bind(this), 100);
+	    $('.pause').css({display: "none"});
+	    this.isPaused = false;
 	  }
 
 	}
@@ -233,17 +296,17 @@
 	    for(let i = 0; i < this.segments.length; i++)
 	    {
 	      if (this.segments[i].equals(first)) {
+	        ouch.play();
 	        alert("You Lose!");
 	        this.segments = [];
-	        ouch.play();
 	        return;
 	      }
 	    }
 
 	    if(first.isOutOfBounds()){
+	      wall.play();
 	      alert("You Lose!");
 	      this.segments = [];
-	      wall.play();
 	      return;
 	    }
 

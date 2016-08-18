@@ -3,6 +3,24 @@ html{
   background-size: cover;
 }
 
+.scoreboard {
+  position: absolute;
+  left: -215px;
+  width: 200px;
+  height: 400px;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.personal-score {
+  text-align: center;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 18px;
+  text-shadow: -3px 3px 6px rgba(0, 0, 0, 0.5);;  
+}
+
 .score {
   display: block;
   margin: 0 auto;
@@ -19,6 +37,7 @@ html{
 }
 
 .snake{
+  position: relative;
   border: 2px solid black;
   width: 400px;
   height: 400px;
@@ -55,4 +74,15 @@ html{
   font-size: 36px;
   font-weight: bold;
   text-shadow: 2px 2px 10px rgba(245,0,0,0.8);
+}
+
+.pause {
+  display: none;
+  color: white;
+  text-shadow: 5px 5px 20px black;
+  font-size: 56px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50%;
 }

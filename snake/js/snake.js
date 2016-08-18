@@ -17,17 +17,17 @@ class Snake {
     for(let i = 0; i < this.segments.length; i++)
     {
       if (this.segments[i].equals(first)) {
+        ouch.play();
         alert("You Lose!");
         this.segments = [];
-        ouch.play();
         return;
       }
     }
 
     if(first.isOutOfBounds()){
+      wall.play();
       alert("You Lose!");
       this.segments = [];
-      wall.play();
       return;
     }
 

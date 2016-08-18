@@ -14,6 +14,8 @@ class View {
 
   constructor ($el) {
     this.$el = $el;
+    this.isPaused = false;
+    $('.pause').css({display: "none"});
     this.snake = new Snake();
     this.board = new Board(this.snake);
     this.updateTurn = false;
@@ -54,7 +56,7 @@ class View {
       let left = this.board.apples.slice(0,index);
       let right = this.board.apples.slice(index + 1);
       this.board.apples = [...left, ...right];
-      this.eatApple()
+      this.eatApple();
     }
     this.board.render();
     this.updateTurn = false;
@@ -71,6 +73,14 @@ class View {
 
   quit() {
     clearInterval(this.interval);
+    $('.pause').css({display: "block"});
+    this.isPaused = true;
+  }
+
+  resume() {
+    this.interval = setInterval(this.step.bind(this), 100);
+    $('.pause').css({display: "none"});
+    this.isPaused = false;
   }
 
 }
